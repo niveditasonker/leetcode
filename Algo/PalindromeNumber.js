@@ -8,10 +8,9 @@ var isPalindrome = function(x) {
         reverseNum = reverseNum * 10 + lastDigit;
         num = Math.floor(num/10);
 
-        console.log(lastDigit, reverseNum, num);
-
-        console.log(x==reverseNum);
+        // console.log(lastDigit, reverseNum, num);
     }
+    return (x==reverseNum);
 
 };
 
