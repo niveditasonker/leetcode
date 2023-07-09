@@ -1,3 +1,5 @@
+// Left -> Right -> Root
+
 var postOrderTraversal = function(root) {
     let result = [];
 

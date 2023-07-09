@@ -6,7 +6,7 @@ var summaryRanges = function(nums) {
         if (nums[i] !== first) {
             res.push(first + '->' + nums[i]);
         } else {
-            res.push (first + ' ');
+            res.push (first + '');
         }
     }
 

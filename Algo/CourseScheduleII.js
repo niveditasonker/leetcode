@@ -8,18 +8,24 @@ var findOrder = function(numCourses, prerequisites) {
     let stack = [];
     let res = [];
 
+    console.log(preReqCourses);
     for (let [c1] of prerequisites){
+        console.log(c1);
         preReqCourses[c1]++
     }
+    console.log(preReqCourses);
 
     for (let i=0;i<preReqCourses.length; i++){
         if (preReqCourses[i] === 0){
             stack.push(i);
         }
     }
+    
+    console.log(stack);
 
     while(stack.length) {
         const currCourse = stack.pop();
+        console.log(`currCourse: ${currCourse}`);
         numCourses--;
         res.push(currCourse);
 
@@ -37,5 +43,7 @@ var findOrder = function(numCourses, prerequisites) {
     return numCourses === 0 ? res:[];
 };
 
-let numCourses = 4, prerequisites = [[1,0],[2,0],[3,1],[3,2]];
+let numCourses = 2, prerequisites = [[1,0]];
 console.log(findOrder(numCourses, prerequisites));
+// numCourses = 4, prerequisites = [[1,0],[2,0],[3,1],[3,2]];
+// console.log(findOrder(numCourses, prerequisites));

@@ -2,6 +2,7 @@ var merge = function(intervals) {
     let i =1; j=0;
 
     intervals.sort((a, b) => a[0] - b[0]);
+    console.log(intervals);
     let result = [intervals[0]];
     
     while (i<intervals.length) {
