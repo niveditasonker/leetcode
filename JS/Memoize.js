@@ -34,7 +34,7 @@ const memoize = (func) => {
 
   const memoizedValue = [];
   const clumsysquare2 = (num) => {
-    if ((memoizedValue[num] == !undefined)) {
+    if ((memoizedValue[num] !== undefined)) {
       return memoizedValue[num];
     }
   

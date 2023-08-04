@@ -8,6 +8,13 @@ var MRUQueue = function(n) {
     const arrFrom = Array.from({length: n}, (_, index) => index + 1);
     // console.log(arr);
     // console.log(arrFrom);
+
+    const qArr = [];
+
+    for (let i=1; i<=n; i++){
+      qArr.push(i);
+    }
+    // console.log(qArr);
 };
 
 /** 
@@ -95,3 +102,41 @@ class MRUQueueDLL {
       this.prev = null;
     }
   }
+
+
+// Using sqrt(n) complexity:
+
+var MRUQueue = function(n) {
+  this.queueSize = Math.floor(Math.sqrt(n));
+  this.numberOfQueue = Math.ceil(n  / this.queueSize);
+  this.queues = new Array(this.numberOfQueue);
+  const lastQueueLength = n - this.queueSize * (this.numberOfQueue - 1);
+  for(let i = 0; i < this.numberOfQueue; i++) {
+      this.queues[i] = new Array(i !== this.numberOfQueue - 1 ? this.queueSize : lastQueueLength).fill(0);
+      for(let k = 0; k <  this.queues[i].length; k++) {
+          this.queues[i][k] = i * this.queueSize + k + 1;
+      }
+  }
+};
+
+MRUQueue.prototype.shift = function(i, val) {
+  const queueLen = this.queues.length - 1
+  let cur = val;
+  for(let j = queueLen; i < j; j--) {
+      this.queues[j].push(cur);
+      cur = this.queues[j].shift();
+  }
+  this.queues[i].push(cur);
+};
+
+/** 
+* @param {number} k
+* @return {number}
+*/
+MRUQueue.prototype.fetch = function(k) {
+  const i = Math.floor((k -1) / this.queueSize);
+  const index = (k - 1) % this.queueSize;
+  const [val] = this.queues[i].splice(index, 1);
+  this.shift(i, val)
+  return val;
+};

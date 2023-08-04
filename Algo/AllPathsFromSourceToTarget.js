@@ -13,7 +13,7 @@ var allPathsSourceTarget = function(graph) {
         // console.log(allPaths);
 
         for (const p of graph[start]){
-            // console.log(p, graph[start]);
+            console.log(p, graph[start], path, [...path,p]);
                 dfs(p, [...path, p]);
         }
     

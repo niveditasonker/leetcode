@@ -28,6 +28,22 @@ Array.prototype.myReduce2 = function (callback, initial) {
     return initial;
 }
 
+
+// Leetcode:
+var reduceLeetcode = function(nums, fn, init) {
+  if (!nums) {
+      return init;
+  }
+
+  let val = init;
+  
+  for (let i=0; i<nums.length; i++){
+      val = fn(val, nums[i]);
+  }
+  
+  return val;    
+};
+
 console.log([1,2,3,4].myReduce((acc, value) => {
   return acc + value;
 }));

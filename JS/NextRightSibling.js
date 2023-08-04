@@ -11,8 +11,7 @@ function nextRightSibling(root, target) {
             return queue.shift();
         } else if (curr == null){
             queue.push(null);
-        } else {
-          (curr.children)
+        } else if (curr.children){
             queue.push(...curr.children);
         }
     }
@@ -28,7 +27,7 @@ function nextRightSiblingUsingDOMAPI(root, target) {
     let parent = target.parentElement;
     // Loop up towards root till we get a node with 
     while(parent){
-      parent = nextRightSibling(root, parent);
+      parent = nextRightSiblingUsingDOMAPI(root, parent);
       // because we're only 1 level above, if there's a first child, it is the right sibling.
       if(parent && parent.firstElementChild) return parent.firstElementChild;
     }

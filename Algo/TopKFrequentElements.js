@@ -23,3 +23,29 @@ var topKFrequent = function(nums, k) {
 
     // return Object.keys(map).splice(0, k);
 };
+
+var topKFrequent2 = function(nums, k) {
+    const freqMap = new Map();
+    const bucket = [];
+    const result = [];
+    
+    for(let num of nums) {
+        freqMap.set(num, (freqMap.get(num) || 0) + 1);
+    }
+    
+    for(let [num, freq] of freqMap) {
+        // bucket[freq] = (bucket[freq] || new Set()).add(num);
+        // create new Set for this key if it doesn't already exist
+        // Map contain number as key and frequency as value.
+        // This code loops through map and insert keys and values inside bucket.
+        // bucket[frequency] = (if there is bucket[frequency] set then add (number)) or new Set().add(number).
+        bucket[freq] || bucket[freq] || new Set();
+        bucket[freq].add(num);
+    }
+    
+    for(let i = bucket.length-1; i >= 0; i--) {
+        if(bucket[i]) result.push(...bucket[i]);
+        if(result.length === k) break;
+    }
+    return result;
+};

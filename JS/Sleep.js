@@ -9,6 +9,18 @@ function wait(millis) {
     return new Promise(resolve => setTimeout(resolve, millis));
 }
 
+async function sleep(millis) {
+    const res = await new Promise((resolve, reject) => {
+        try{
+            setTimeout(() => {
+                resolve();
+            }, millis);
+        } catch(err){
+            reject(err);
+        }
+    });
+    return res;
+}
 
 // /** 
 //  * let t = Date.now()

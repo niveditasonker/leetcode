@@ -1,4 +1,6 @@
-Question: Given a list of products fetched from an API, implement a caching mechanism in JavaScript to store the retrieved data locally and avoid excessive API calls on subsequent requests.
+// Question: Given a list of products fetched from an API,
+// implement a caching mechanism in JavaScript to store the
+// retrieved data locally and avoid excessive API calls on subsequent requests.
 /*
 Sample Answer:
 

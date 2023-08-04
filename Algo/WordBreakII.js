@@ -22,6 +22,14 @@ var wordBreak = function(s, wordDict, curr= [], res=[]) {
 let s ="catsanddog", wordDict = ["cat","cats","and","sand","dog"];
 console.log(wordBreak(s, wordDict));
 
+/*
+O(n * m * k), where:
+
+n: Length of the input string s
+m: Number of elements in the word dictionary wordDict
+k: Maximum length of a word in the word dictionary
+*/
+
 
 const backtrack = (s, words, path, result) => {
     if (s.length === 0) {

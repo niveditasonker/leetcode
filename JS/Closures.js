@@ -35,7 +35,7 @@ function closure(){
     for (let i=0; i<=3; i++){
         setTimeout(()=> {
             console.log(i);
-        }, 1000);
+        }, i*1000);
     }
 
     for (var i=0; i<=3; i++){
@@ -49,3 +49,17 @@ function closure(){
 }
 
 console.log(closure());
+
+function counter() {
+    let count = 0;
+  
+    return function() {
+      count++;
+      console.log(count);
+    }
+  }
+  
+  const increment = counter();
+  increment(); // logs 1
+  increment(); // logs 2
+  increment(); // logs 3

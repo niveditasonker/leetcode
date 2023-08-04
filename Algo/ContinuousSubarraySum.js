@@ -12,7 +12,10 @@ var checkSubarraySum = function(nums, k) {
 
         if(map.has(sum)) return true;
 
+        console.log(`prefix: ${prefix}, n: ${n}`);
+
         map.add(prefix);
+        console.log(map);
 
         // console.log(`prefix: ${prefix}, n: ${n}`);
         // console.log(map);

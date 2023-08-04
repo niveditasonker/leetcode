@@ -1,16 +1,18 @@
 var twoSum = function(nums, target) {
-    let data = {};
+    let map = {};
 
     for(let i=0;i<nums.length;i++){
         let diff = target - nums[i];
 
-        if(diff in data) {
-            return [data[diff],i];
+        if(diff in map) {
+            return [map[diff],i];
         } else {
-            data[nums[i]] = i;
+            map[nums[i]] = i;
         }
         // console.log(data);
     }
+
+    return map;
 };
 
 console.log(twoSum([2,7,11,15], 9));

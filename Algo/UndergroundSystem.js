@@ -26,9 +26,9 @@ UndergroundSystem.prototype.checkOut = function(id, stationName, t) {
     const key = [stn, stationName].join();
 
     if (this.avg.has(key)){
-        let [avg, count] = this.avg.get(key);
-        const averageTime = [avg * (count/++count) + ((t - stm)/count), count]
-        this.avg.set(key, averageTime);        
+        let [pastTravelTime, count] = this.avg.get(key);
+        const currTotalTravel = (pastTravelTime + (t - stm));
+        this.avg.set(key, [currTotalTravel, count+1]);
     } else {
         this.avg.set(key, [(t-stm), 1]);
     }
@@ -42,7 +42,8 @@ UndergroundSystem.prototype.checkOut = function(id, stationName, t) {
  */
 UndergroundSystem.prototype.getAverageTime = function(startStation, endStation) {
     console.log(this.avg.get([startStation, endStation]));
-    return this.avg.get([startStation, endStation].join())[0];
+    const [total, count] = this.avg.get([startStation, endStation].join());
+    return total/count;
 };
 
 /** 

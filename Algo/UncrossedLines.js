@@ -18,6 +18,7 @@ Complexity
 Time complexity: O(m∗n)O(m*n)O(m∗n)
 */
 
+// Problem same as longest common subsequence
 var maxUncrossedLines = function(nums1, nums2) {
     let m = nums1.length;
     let n = nums2.length;

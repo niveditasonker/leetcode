@@ -42,6 +42,84 @@ log2('from debounce 2 Hello'); // cancelled
 log2('from debounce 2....Hello'); // cancelled
 log2('from debounce 2...and Hello'); // Logged at t=100ms  
 
+// Using trailing:
+function debounce(func, wait, options = {}) {
+  let timeoutId;
+
+  return function (...args) {
+    const shouldCallNow = options.trailing && !timeoutId;
+
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      timeoutId = null;
+
+      if (!options.trailing || shouldCallNow) {
+        func.apply(this, args);
+      }
+    }, wait);
+
+    if (shouldCallNow) {
+      func.apply(this, args);
+    }
+  };
+}
+
+// Example usage:
+const debouncedFn = debounce((value) => {
+  console.log(`Debounced: ${value}`);
+}, 300, { trailing: true });
+
+debouncedFn("Hello");
+debouncedFn("World");
+debouncedFn("OpenAI");
+
+// using leading:
+function debounce(func, wait, options = {}) {
+  let timeoutId;
+  let leadingTimeoutId;
+  let leadingExecuted = false;
+
+  return function (...args) {
+    const shouldCallLeading = options.leading && !leadingTimeoutId;
+    const shouldCallTrailing = !options.leading && options.trailing;
+
+    clearTimeout(timeoutId);
+    clearTimeout(leadingTimeoutId);
+
+    if (shouldCallLeading) {
+      func.apply(this, args);
+      leadingExecuted = true;
+    }
+
+    leadingTimeoutId = setTimeout(() => {
+      leadingTimeoutId = null;
+
+      if (shouldCallTrailing && leadingExecuted) {
+        func.apply(this, args);
+        leadingExecuted = false;
+      }
+    }, wait);
+
+    timeoutId = setTimeout(() => {
+      if (!shouldCallLeading && !leadingExecuted) {
+        func.apply(this, args);
+      }
+      leadingExecuted = false;
+    }, wait);
+  };
+}
+
+// Example usage:
+const debouncedFnLeading = debounce((value) => {
+  console.log(`Debounced: ${value}`);
+}, 300, { leading: true });
+
+debouncedFnLeading("Hello");
+debouncedFnLeading("World");
+debouncedFnLeading("OpenAI");
+
+
 
 //clearTimeout() is a forgiving function and passing an invalid ID to clearTimeout()
 // silently does nothing; no exception is thrown.

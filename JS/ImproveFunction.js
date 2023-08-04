@@ -11,14 +11,45 @@ const excludes = [
 ];
 
 function excludeItems(items, excludes) { 
-    excludes.forEach( pair => { 
-        items = items.filter(item => item[pair.k] !== item[pair.v])
+    excludes.forEach( pair => {
+      // console.log(pair);
+        items = items.filter(item => item[pair.k] !== pair.v)
     })
 
     return items;
 }
 
-console.log(excludeItems(items, excludes));
+function excludeItems(items, excludes) {
+  let excludesMap = new Map();
+
+  for (let val of excludes){
+    const values = excludesMap.get(val.k) || [];
+    excludesMap.set(val.k, [...values, val.v]);
+  }
+
+  // console.log("Map; ", excludesMap);
+
+  const res = items.filter((curr) => {
+    let shouldExclude = false;
+
+    for (let currKey of Object.keys(curr)){
+      // console.log("currKey: ", currKey);
+
+      if(excludesMap.has(currKey) && excludesMap.get(currKey).includes(curr[currKey])){
+        shouldExclude = true;
+        break;
+      }
+
+    }
+
+    return !shouldExclude;
+
+  });
+  return res;  
+}
+
+// console.log(excludeItems(items, excludes));
+console.log(exclude(items, excludes));
 
 /*
 
