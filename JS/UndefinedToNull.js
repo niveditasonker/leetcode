@@ -1,6 +1,3 @@
-
-
-
 /**
  * @param {any} arg
  * @returns any

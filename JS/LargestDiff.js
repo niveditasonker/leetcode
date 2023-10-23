@@ -1,11 +1,12 @@
 function largestDiff(nums){
     let diff = nums[1] - nums[0];
+    let n = nums.length;
     let currSum = diff;
-    let maxDiff = 0;
+    let maxDiff = currSum;
 
-    for (let i=1; i< nums.length-1; i++){
+    for (let i=1; i< n-1; i++){
         diff = nums[i+1] - nums[i];
-        console.log(`diff: ${diff}, currSum: ${currSum}`);
+        // console.log(`diff: ${diff}, currSum: ${currSum}`);
         if (currSum > 0 ) {
             currSum += diff;
         } else {
@@ -31,7 +32,8 @@ function largestDiff2(arr) {
     return Math.abs(min-max);
   }
 
-// console.log(largestDiff([-1, 2,3,10, 9]));
+console.log(largestDiff([-1, 2,3,10, 9]));
 // console.log(largestDiff([]));
 // console.log(largestDiff([1]));
-console.log(largestDiff([2,59,37,57,10,30]));
+console.log(largestDiff([2,60,37,57,10,30]));
+console.log(largestDiff2([2,60,37,57,10,30]));
