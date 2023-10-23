@@ -1,3 +1,5 @@
+// refer to 3rd solution
+
 var minNumberOfFrogs = function(croakOfFrogs) {
     let n = croakOfFrogs.length-1;
     let count = new Array(n).fill(0);
@@ -127,5 +129,10 @@ croakOfFrogs = "croakcrook";
 console.log(minNumberOfFrogs(croakOfFrogs));
 // console.log(minNumberOfFrogs2(croakOfFrogs));
 console.log(minNumberOfFrogs3(croakOfFrogs));
+
+croakOfFrogs = "ccckkk";
+console.log(minNumberOfFrogs(croakOfFrogs));
+console.log(minNumberOfFrogs3(croakOfFrogs));
+
 
 

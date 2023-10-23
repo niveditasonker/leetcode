@@ -19,6 +19,14 @@ var lengthOfLongestSubstring = function(s) {
 
 };
 
+/*
+for loop: O(n)
+while loop: O(1)
+charSet.add(): O(1)
+Math.max(): O(1)
+Therefore, the overall complexity of the program is O(n).
+*/
+
 let s = "abcabcbb";
 console.log(lengthOfLongestSubstring(s));
 

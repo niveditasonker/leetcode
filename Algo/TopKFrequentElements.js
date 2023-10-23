@@ -39,7 +39,7 @@ var topKFrequent2 = function(nums, k) {
         // Map contain number as key and frequency as value.
         // This code loops through map and insert keys and values inside bucket.
         // bucket[frequency] = (if there is bucket[frequency] set then add (number)) or new Set().add(number).
-        bucket[freq] || bucket[freq] || new Set();
+        bucket[freq] = bucket[freq] || new Set();
         bucket[freq].add(num);
     }
     
@@ -48,4 +48,35 @@ var topKFrequent2 = function(nums, k) {
         if(result.length === k) break;
     }
     return result;
+};
+
+var topKFrequent3 = function(nums, k) {
+    const mp = new Map();
+    const arr = new Array(nums.length + 1).fill(0);
+    const ans = [];
+
+    nums.forEach(el => {
+        const val = mp.get(el) || 0;
+        mp.set(el, val + 1);
+    });
+
+    for ( let [key, value] of mp ) {
+        const prev = arr[value] || [];
+        prev.push(key);
+        arr[value] = prev;
+    }
+
+
+    arr.reverse();
+    for (let el of arr) {
+        if (k < 1) break;
+        if (el) {
+            for (let el2 of el) {
+                ans.push(el2);
+                k--;
+            }
+        }
+    }
+
+    return ans;
 };

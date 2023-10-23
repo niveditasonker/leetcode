@@ -28,7 +28,7 @@ var spiralOrder = function(matrix) {
 
         if (!(startCol < endCol && startRow < endRow)){
             break;
-        }        
+        }
 
         //right to left
         for (let i=endCol-1; i>=startCol; i--) {

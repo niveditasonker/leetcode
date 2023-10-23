@@ -6,11 +6,14 @@
 var findKthLargest = function(nums, k) {
     let max = -Infinity;
 
-    for (let n of nums){
-        max = Math.max(n, max);
-    }
+    // for (let n of nums){
+    //     max = Math.max(n, max);
+    // }
+    max = Math.max(...nums);
 
     let map = {};
+
+    // construct a hash map of difference between nums[i] and largest
     for (let n of nums){
         const diff = max - n;
         map[diff] = (map[diff] || 0) + 1;

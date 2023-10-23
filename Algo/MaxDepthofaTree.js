@@ -12,6 +12,22 @@ const tree = createNode(3,
 )
 
 var maxDepth = function(root) {
+    if (!root) return 0;
+    const queue = [root];
+    let depth = 0;
+    while (queue.length !== 0) {
+        depth++;
+        const len = queue.length;
+        for (let i = 0; i < len; i++) {
+            if (queue[i].left) queue.push(queue[i].left);
+            if (queue[i].right) queue.push(queue[i].right);
+        }
+        queue.splice(0, len);
+    }
+    return depth;
+};
+
+var maxDepth2 = function(root) {
 	let answer = 0;
     
     if (root == null) return answer;
@@ -48,6 +64,7 @@ var maxDepth = function(root) {
 
 let root = [3,9,20,null,null,15,7];
 console.log(maxDepth(tree));
+console.log(maxDepth2(tree));
 
 
 const maxDepthRecursive = function(root) {
@@ -55,5 +72,5 @@ const maxDepthRecursive = function(root) {
     return 1 + Math.max(maxDepthRecursive(root.left), maxDepthRecursive(root.right));
 }
 
-// console.log(maxDepthRecursive(tree));
+console.log(maxDepthRecursive(tree));
 

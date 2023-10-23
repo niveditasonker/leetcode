@@ -2,6 +2,9 @@ var isPalindrome = function(x) {
     // let strNum = x.toString();
     let num = x;
     let reverseNum = 0;
+    if (x < 0) {
+        return false;
+    }
 
     while (num > 0){
         let lastDigit = num%10;

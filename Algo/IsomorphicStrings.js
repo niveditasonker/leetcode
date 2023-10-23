@@ -16,6 +16,21 @@ var isIsomorphic = function(s, t) {
     return new Set(map.values()).size === map.size
 };
 
+var isIsomorphic2 = function(s, t) {
+    
+    const table = {}, tracker = {}
+    
+    for(let i = 0; i < s.length; i++){
+        if(!(s[i] in table) && !(t[i] in tracker)){
+            table[s[i]] = t[i]
+            tracker[t[i]] = s[i]
+        }else{
+            if(table[s[i]] !== t[i]) return false;
+        }
+    }
+    return true
+};
+
 
 let s = "egg", t = "add";
 

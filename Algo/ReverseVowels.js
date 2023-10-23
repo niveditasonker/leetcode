@@ -9,9 +9,10 @@ var reverseVowels = function(s) {
     while (i < j){
         if (isVowel(s[i])) {
             if (isVowel(s[j])) {
-                let tmp = s[i];
-                s[i] = s[j];
-                s[j] = tmp;
+                [s[i], s[j]] = [s[j], s[i]];
+                // let tmp = s[i];
+                // s[i] = s[j];
+                // s[j] = tmp;
                 i++;
                 j--;
             } else {

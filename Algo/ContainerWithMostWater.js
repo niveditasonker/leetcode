@@ -6,14 +6,13 @@ var maxArea = function(height) {
     while (left <= right){
         let area = 0;
         if (height[left] <= height[right]){
-            area = height[left]*[right-left]; // right-left == width;
-            max = Math.max(max, area);
+            area = height[left]*(right-left); // right-left == width;
             left++;
         } else{
-            area = height[right]*[right-left]; // right-left == width;
-            max = Math.max(max, area);
+            area = height[right]*(right-left); // right-left == width;
             right--;
         }
+        max = Math.max(max, area);
     }
     return max;
 };

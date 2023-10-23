@@ -6,8 +6,8 @@ function TreeLinkNode(val) {
 let n1 = new TreeLinkNode(10);
 let n2 = new TreeLinkNode(9);
 let n3 = new TreeLinkNode(20);
-let n4 = new TreeLinkNode(null);
-let n5 = new TreeLinkNode(null);
+let n4 = new TreeLinkNode(3);
+let n5 = new TreeLinkNode(12);
 let n6 = new TreeLinkNode(15);
 let n7 = new TreeLinkNode(7);
 

@@ -9,13 +9,16 @@ var maxFreq = function(s, maxLetters, minSize, maxSize) {
         console.log(tmpSet, tmpSet.size, sub, sub.length-1);
 
         if(tmpSet.size <= maxLetters){
-            if(map[sub]){
-                // console.log("here");
-                map[sub] += 1;
-            } else {
-                // console.log("here 2");
-                map[sub] = 1;
-            }
+            const count = map[sub] || 0;
+            map[sub] = count+1;
+
+            // if(map[sub]){
+            //     // console.log("here");
+            //     map[sub] += 1;
+            // } else {
+            //     // console.log("here 2");
+            //     map[sub] = 1;
+            // }
 
             // console.log(map);
 

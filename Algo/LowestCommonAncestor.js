@@ -25,7 +25,7 @@ var lowestCommonAncestor = function(root, p, q) {
 
 
 };
-
+// time: O(n) space: O(n)
 let t1 = new TreeLinkNode(3);
 let t2 = new TreeLinkNode(5);
 let t3 = new TreeLinkNode(1);
@@ -64,3 +64,40 @@ console.log(lowestCommonAncestor(n1,4,5));
 
 
 console.log(lowestCommonAncestor(t1,5, 1));
+
+// Iterative
+
+const lowestCommonAncestorIterative = function (root, p, q) {
+	const queue = [root];
+
+	while (queue.length) {
+		const node = queue.shift();
+
+		if (node.left) {
+			node.left.parent = node;
+			queue.push(node.left);
+		}
+
+		if (node.right) {
+			node.right.parent = node;
+			queue.push(node.right);
+		}
+	}
+
+	const set = new Set();
+	while (p || q) {
+		if (p) {
+			if (set.has(p.val)) return p;
+			set.add(p.val);
+			p = p.parent;
+		}
+		if (q) {
+			if (set.has(q.val)) return q;
+			set.add(q.val);
+			q = q.parent;
+		}
+	}
+};
+
+console.log(lowestCommonAncestorIterative(n1,4,5));
+console.log(lowestCommonAncestorIterative(t1,5, 1));

@@ -1,0 +1,203 @@
+/**
+ * Build a "Roblox API Client" class that contains various convenient utilities to
+ * help Roblox FE engineers to easily interact with our service/APIs.
+ *
+ * A skeleton implementation has been provided with a private `fetch` method. You
+ * should treat it as a black box and use it whenever you need to fire off the
+ * actual requests. Its detailed implementation shouldn't concern you.
+ *
+ * For the sake of this exercise, you'll only have access to the following
+ * `Promise` related APIs:
+ *
+ * - `Promise` constructor
+ * - `Promise.resolve`/`Promise.reject`
+ * - `Promise.prototype.then`/`Promise.prototype.catch`/`Promise.prototype.finally`
+ *
+ * You are free to modify the class implementation however your want (e.g. add
+ * properties, add private helper methods, etc.), but please make sure to only do
+ * so when it is necessary to your implementation.
+ *
+ * At the end of the day, we - as programmers - like to repeat ourselves, aren't we
+ * :p
+ *
+ */
+
+const { resolve } = require("path")
+
+/**
+ * Part I - Request Batching
+ *
+ * It's a common need for FE engineers to batch requests, making them done in
+ * parallel. For part I, your job is to implement a method `parallel`. The method
+ * takes in an array of request configurations (i.e. `configs`), and then:
+ *
+ * - Execute them in parallel and return **an consolidated promise**
+ * - The returned promise will:
+ *   - Resolve with an array of responses if all requests have completed
+ *     successfully. The request configuration's order should be preserved when
+ *     returning the responses
+ *   - Reject if any of the requests fails with the response from the failed
+ *     request, without waiting on the responses from any other requests
+ */
+
+/**
+ * Part II - Sequential Execution
+ *
+ * Another common scenario when make requests is to execute them in sequential
+ * order. For part II, your job is to implement a method `sequential`. The method
+ * takes in array of request configurations (i.e. `configs`), and then:
+ * - Execute them in sequential order (as they are passed in) and return **an consolidated promise**
+ * - The returned promise will:
+ *   - Resolve with the response of the last request if all requests have completed
+ *     successfully
+ *   - Reject if any of the requests fails in the middle with the response from the failed
+ *     request, without executing any of the remaining requests
+ */
+
+/**
+ * Part III - Flexible Configuration
+ *
+ * To give our engineers the full flexibility in controlling how the client make
+ * the requests, the API client needs to support several optional configuration
+ * options, namely `maxConcurrency` and `maxRetry`:
+ *
+ * - `maxConcurrency` controls how many requests can be made from the same API
+ *   client at the same time. If there are more requests to make, later ones can
+ *   only start once the earlier ones have settled. If that happens, requests
+ *   execution should have a guaranteed FIFO order
+ * - `maxRetry` defines a built-in retry mechanism, where each requests will be
+ *   automatically retry up to that many times if it doesn't succeed
+ *
+ * Please modify the existing API client class implementation to accept those
+ * configurations as optional options to the constructor, where the default is
+ * unlimited concurrency and no automatic retry. Please also make sure your
+ * implementation is automatically compatible with your implementation in Part I &
+ * II as well.
+ */
+
+
+/**
+ * A class that contains various convenient utilities to help Roblox FE
+ * engineers to easily interact with our service/APIs.
+ *
+ * @class RobloxAPIClient
+ */
+class RobloxAPIClient {
+    
+    
+  /**
+   * Creates an instance of RobloxAPIClient.
+   *
+   * @memberof RobloxAPIClient
+   */
+  constructor() {
+    /** some internal state used by `fetch` */
+    this.maxRetry = 3;
+    this.maxConcurrency = 3;
+  }
+    
+  /**
+   * Public `request` implementation
+   * Makes a request based on the given request configuration
+   *
+   * @param {{url: URL, method: string}} config
+   * @return {Promise<*>}
+   * @memberof RobloxAPIClient
+   */  
+  async request(config) {
+    return this._fetch(config)
+  }
+   
+  /**
+   * Internal `fetch` implementation
+   *
+   * @private
+   * @param {{url: URL, method: string}} config
+   * @return {Promise<*>}
+   * @memberof RobloxAPIClient
+   */  
+  async _fetch(config) {
+    /** access some internal state, make the request, returns a promise */
+  }
+  
+//  * - `Promise` constructor
+//  * - `Promise.resolve`/`Promise.reject`
+//  * - `Promise.prototype.then`/`Promise.prototype.catch`/`Promise.prototype.finally`
+  async _parallel(configs){
+      if(!configs.length) return;
+      return new Promise((resolve, reject) => {
+          const res = [];
+          
+          try {
+              for (let i=0; i<configs.length; i++){
+                //   res.push(this._fetch(config));
+                this._fetch(configs[i])
+                .then((response) => res[i] = response)
+                .catch((err) => {
+                    const returnVal = this.maxRetries(this.maxRetry, config);
+                    if (returnVal.status){
+                        res[i] = returnVal.result;
+                    } else {
+                        reject(err);
+                    }
+                });
+              }
+              resolve(res);
+          }catch(err){
+              reject(err);
+          }
+      });
+  }
+  
+  async _sequential(configs){
+      if(!configs.length) return;
+
+      return new Promise(async(resolve, reject) => {
+          let res;
+          
+          try {
+              for(const config of configs){
+                  res = await this._fetch(config).
+                  then((response) => {
+                      return response;
+                 }).catch((err) => {
+                     return err;
+                 })
+              }
+              resolve(res);
+          } catch(err){
+              reject(err);
+          }
+          
+      });     
+  }
+  
+  maxRetries(num, config){
+      let obj = {};
+      while(num > 0){
+          this._fetch(config)
+          .then((res) => {
+              obj.result = res;
+              obj.status = true;
+              num = 0;
+              return;
+            })
+          .catch((err) => {
+              obj.result = err;
+              obj.status = false;
+            });
+          num--;
+      }
+      return obj;
+  }
+}
+
+
+// maintain inProgress = 0
+// let idx = 0;
+// enter while loop: check inProgress < maxConcurrency && i < configs.length
+// increment inProgress += 1
+//  curr config = config[idx++]
+// config.then(() => inProgress-- parallel()) -> catch
+// if(inProgress == 0 && end of configs length) -> resolve(configs)
+// 

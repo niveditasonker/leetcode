@@ -1,6 +1,6 @@
 function TreeLinkNode(val) {
 	this.val = val;
-    this.left = this.right = this.next = null;
+  this.left = this.right = this.next = null;
 }
 
 let n1 = new TreeLinkNode(-10);
@@ -45,6 +45,8 @@ var maxPathSum = function(root) {
 
         max = Math.max(leftSum, rightSum, node.val, totalSum, max);
 
+        // The most important part is what do we return for this recursive function?
+        // The answer is we are returning The Max Path from this node
         return Math.max(leftSum, rightSum, node.val);
     }
 
