@@ -37,6 +37,7 @@ var findOrder = function(numCourses, prerequisites) {
                     stack.push(c1);
                 }
             }
+            console.log(stack);
         }
     }
 

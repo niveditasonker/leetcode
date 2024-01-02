@@ -40,9 +40,10 @@ const countCoinChange = (coins, amount, memo={}) => {
         min = Math.min(countCoinChange(coins, restAmount, memo) + 1, min) 
     }
 
-    memo[amount] = min
-    return memo[amount] 
+    memo[amount] = min;
+    return memo[amount]; 
 }
 // Time complexity: O(n∗m)
 let coins = [1,2,5], amount = 11;
 console.log(coinChange(coins, amount));
+console.log(coinChange2(coins, amount));

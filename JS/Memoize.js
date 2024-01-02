@@ -26,13 +26,13 @@ const memoize = (func) => {
       return result;
   });
   
-  console.log(clumsysquare(190));
-  console.log(clumsysquare(799));
-  console.log(clumsysquare(4000));
-  console.log(clumsysquare(7467));
-  console.log(clumsysquare(9666));
+  // console.log(clumsysquare(190));
+  // console.log(clumsysquare(799));
+  // console.log(clumsysquare(4000));
+  // console.log(clumsysquare(7467));
+  // console.log(clumsysquare(9666));
 
-  const memoizedValue = [];
+  const memoizedValue = {};
   const clumsysquare2 = (num) => {
     if ((memoizedValue[num] !== undefined)) {
       return memoizedValue[num];
@@ -54,3 +54,33 @@ const memoize = (func) => {
   console.log(clumsysquare2(4000));
   console.log(clumsysquare2(7467));
   console.log(clumsysquare2(9666));  
+
+
+  function multiplyBy2(x) {
+    return x * 2;
+  }
+  
+function memoize2(func) {
+    let map = new Map();
+  
+    return function(x) {
+      if (map.has(x)) {
+        return `Returned from memory ${map.get(x)}`;
+      }
+  
+      let result = func(x);
+      map.set(x, result);
+  
+      return `Returned from function ${result}`;
+    }
+}
+  
+let wrapper = memoize2(multiplyBy2);
+console.log(wrapper(2)); // Returned from function 4
+console.log(wrapper(4)); // Returned from function 8
+console.log(wrapper(5)); // Returned from function 10
+console.log(wrapper(2)); // Returned from memory 4
+console.log(wrapper(2)); // Returned from memory 4
+console.log(wrapper(6)); // Returned from function 12
+
+// https://javascript.plainenglish.io/intro-to-memoization-in-javascript-with-examples-e1a2b7f44575

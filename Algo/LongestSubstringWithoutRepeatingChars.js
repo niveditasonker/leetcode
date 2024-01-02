@@ -11,7 +11,7 @@ var lengthOfLongestSubstring = function(s) {
             left++;
         }
         charSet.add(s[i]);
-        // console.log(charSet);
+        console.log(charSet);
         max = Math.max(max, charSet.size);
     }
 
@@ -34,4 +34,13 @@ s = "bbbbb";
 console.log(lengthOfLongestSubstring(s));
 
 s = "pwwkew";
+console.log(lengthOfLongestSubstring(s));
+
+s= "abcabc";
+console.log(lengthOfLongestSubstring(s));
+
+s = 'a12#2';
+console.log(lengthOfLongestSubstring(s));
+
+s = 'aaaaa';
 console.log(lengthOfLongestSubstring(s));

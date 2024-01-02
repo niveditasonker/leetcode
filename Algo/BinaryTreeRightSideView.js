@@ -9,15 +9,17 @@ var rightSideView = function(root) {
         // let size = q.length;
         let [node, level] = q.shift();
 
-        console.log(`leng: ${res.length}, level: ${level}, node: ${node.val}`);
+        
 
         if (res.length === level){
             res.push(node.val);
         }
+        console.log(`right: ${res.length}, level: ${level}, node: ${node.val}`);
 
         if (node.right){
             q.push([node.right, level+1]);
         }
+        console.log(`left: ${res.length}, level: ${level}, node: ${node.val}`);
 
         if (node.left){
             q.push([node.left, level+1]);

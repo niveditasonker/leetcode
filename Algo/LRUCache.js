@@ -18,10 +18,9 @@ LRUCache.prototype.get = function(key) {
         return -1
     }
 
-    const value = this.cacheMap.get(key);
     this.cacheMap.delete(key);
-    this.cacheMap.set(key, value);
-    return value;
+    this.cacheMap.set(key, val);
+    return val;
 };
 
 /** 
@@ -34,6 +33,14 @@ LRUCache.prototype.put = function(key, value) {
         this.cacheMap.delete(key);
     } else if (this.cacheMap.size === this.limit){
         const last = this.cacheMap.keys().next().value;
+
+        /*
+        Last item from map:
+
+            const getLastItemInMap = cacheMap => Array.from(cacheMap)[cacheMap.size-1]
+            const getLastKeyInMap = cacheMap => Array.from(cacheMap)[cacheMap.size-1][0]
+            const getLastValueInMap = cacheMap => Array.from(cacheMap)[cacheMap.size-1][1]
+        */
         this.cacheMap.delete(last);
     }
 

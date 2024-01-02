@@ -32,3 +32,19 @@ class Observable {
       return sub;
     }
 }
+
+const observable = new Observable((subscriber)=> {
+  subscriber.next(1)
+  subscriber.next(2)
+  setTimeout(() => {
+    subscriber.next(3)
+    subscriber.next(4)
+    subscriber.complete()
+  }, 100)
+});
+
+const hello = (e) => {
+  console.log(e);
+}
+
+const sub = observable.subscribe(hello);

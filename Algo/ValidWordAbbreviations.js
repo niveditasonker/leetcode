@@ -4,7 +4,7 @@ var validWordAbbreviation = function(word, abbr) {
     let number =0;
 
     // check for loop boundaries
-    while(i<abbr.length && j < word.length){
+    while(i<=abbr.length && j <= word.length){
         // if the abbr char is a number
         if(!isNaN(abbr[i])){
             // add the number to the previous number times 10
@@ -33,4 +33,8 @@ var validWordAbbreviation = function(word, abbr) {
 };
 
 let word = "internationalization", abbr = "i12iz4n";
+console.log(validWordAbbreviation(word, abbr));
+
+
+word = "a0", abbr = "a";
 console.log(validWordAbbreviation(word, abbr));

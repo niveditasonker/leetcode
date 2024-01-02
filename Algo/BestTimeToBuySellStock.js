@@ -17,3 +17,6 @@ var maxProfit = function(prices) {
 
 let prices = [7,1,5,3,6,4];
 console.log(maxProfit(prices));
+
+prices = [89, 70, 55, 30, 20, 11];
+console.log(maxProfit(prices));

@@ -54,4 +54,4 @@ var permuteLonger = function(nums) {
 
 let nums= [1,2,3];
 console.log(permute(nums));
-console.log(permuteLonger(nums));
+// console.log(permuteLonger(nums));

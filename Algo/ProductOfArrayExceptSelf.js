@@ -13,6 +13,7 @@ var productExceptSelf = function(nums) {
     console.log(res);
 
     for (let i=len-1; i>=0; i--){
+        console.log(multiplier);
         res[i] *= multiplier;
         // console.log(`res[i]: ${res[i]}, multiplier: ${multiplier}, nums[i]: ${nums[i]}`);
         multiplier *= nums[i];
@@ -22,7 +23,8 @@ var productExceptSelf = function(nums) {
     return res;
 };
 
-let nums = [1,2,3,4];
+// let nums = [1,2,3,4];
+let nums = [2,3,4];
 console.log(productExceptSelf(nums));
 
 nums = [-1,1,0,-3,3];

@@ -9,7 +9,7 @@ function wait(millis) {
     return new Promise(resolve => setTimeout(resolve, millis));
 }
 
-async function sleep(millis) {
+async function sleep2(millis) {
     const res = await new Promise((resolve, reject) => {
         try{
             setTimeout(() => {

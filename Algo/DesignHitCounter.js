@@ -23,7 +23,9 @@ HitCounter.prototype.getHits = function(timestamp) {
     let low = timestamp > 300 ? timestamp - 300 : 0;
 
     while (timestamp > low){
-        this.hitMap[timestamp] && (count += this.hitMap[timestamp])
+        if (this.hitMap[timestamp]) {
+            count += this.hitMap[timestamp]; 
+        }
         timestamp--;
     }
     

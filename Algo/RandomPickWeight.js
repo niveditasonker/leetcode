@@ -61,3 +61,11 @@ Solution.prototype.pickIndex = function() {
  * var obj = new Solution(w)
  * var param_1 = obj.pickIndex()
  */
+//["Solution","pickIndex","pickIndex","pickIndex","pickIndex","pickIndex"]
+//[[[1,3]],[],[],[],[],[]]
+let sol = new Solution([1,3]);
+console.log(sol.pickIndex());
+console.log(sol.pickIndex()); // return )1
+console.log(sol.pickIndex()); // return )1
+console.log(sol.pickIndex()); // return )1
+console.log(sol.pickIndex());

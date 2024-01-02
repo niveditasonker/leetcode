@@ -10,6 +10,8 @@ class Stack {
     pop() {
       if (!this.isEmpty()) {
         return this.items.pop();
+        // return this.items.splice(-1);
+        // return this.items.slice(-1);
       } else {
         throw new Error("Stack is empty. Cannot pop.");
       }

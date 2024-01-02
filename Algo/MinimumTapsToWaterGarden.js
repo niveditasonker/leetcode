@@ -8,8 +8,13 @@ var minTaps = function(n, ranges) {
     for (let i = 0; i < ranges.length; i++) {
       intervals.push([i - ranges[i], i + ranges[i]]);
     }
+    console.log(intervals);
     intervals.sort((a, b) => a[0] - b[0]);
+    
+    console.log('sorted intervals: ', intervals);
+
     let currentL = 0, currentR = 0, taps = 0, i = 0;
+    
     while (i < intervals.length) {
       while (i < intervals.length && intervals[i][0] <= currentL) {
         currentR = Math.max(currentR, intervals[i][1]);

@@ -30,7 +30,7 @@ class EventEmitter {
             this.events.set(event, []);
         }
     
-        const listeners = this.events.get(event);
+        let listeners = this.events.get(event);
         listeners.push(cb);
     
         return {
@@ -46,6 +46,7 @@ class EventEmitter {
     
     emit(event, args = []) {
         if (!this.events.has(event)) {
+            console.log('====> no event: ', this.events);
             return [];
         }
     
@@ -56,10 +57,25 @@ class EventEmitter {
             results.push(listener(...args));
         }
     
+        console.log('====> results: ', results);
         return results;
     }
       
   }
+
+
+  const evtEmitter = new EventEmitter()
+  const callback = (...args) => console.log('EventEmitter called', ...args)
+  
+  const subscriber1  = evtEmitter.subscribe('event', callback);
+  console.log('====> subscriber1: ', subscriber1);
+  const subscriber2  = evtEmitter.subscribe('event', callback)
+  
+  subscriber1.unsubscribe()
+  subscriber1.unsubscribe()
+  subscriber1.unsubscribe()
+  
+  evtEmitter.emit('....event', '....sub2 should receive it');
   
   /**
    * const emitter = new EventEmitter();
@@ -113,14 +129,14 @@ class EventEmitterBFE {
     }
 }
 
-const emitter = new EventEmitterBFE()
-const callback1 = (...args) => console.log('called', ...args)
+// const emitter = new EventEmitterBFE()
+// const callback1 = (...args) => console.log('called', ...args)
 
-const sub1  = emitter.subscribe('event', callback1)
-const sub2  = emitter.subscribe('event', callback1)
+// const sub1  = emitter.subscribe('event', callback1)
+// const sub2  = emitter.subscribe('event', callback1)
 
-sub1.release()
-sub1.release()
-sub1.release()
+// sub1.release()
+// sub1.release()
+// sub1.release()
 
-emitter.emit('event', 'sub2 should receive it');
+// emitter.emit('event', 'sub2 should receive it');
